@@ -2,6 +2,8 @@
 
 --Boostrap react khác boostrap: BSR gọn hơn, code sạch hơn 
 
+--Gọi tên components có phân biệt hoa thường
+
 --Expected corresponding JSX closing tag for input: HTML bình thường: <input ...  >
 ---> Cú pháp JSX: <input/>   ---> Thêm '/' để đóng tag
 
@@ -15,3 +17,13 @@ but still need the element to resemble a link, use a button and change it with a
 --Thông báo [HMR] Waiting for update signal from WDS... is not an error. 
 --->HMR: Hot Module Reload. WDS: Webpack Dev Server. This is just saying it's ready to refresh 
 when you save a file so you don't need to manually refresh
+
+--Clone 1 repo rồi npm start lỗi: 'react-scripts' is not recognized as an 
+internal or external command, operable program or batch file
+---> npm install xong rồi npm start
+Link: https://github.com/facebookincubator/create-react-app/issues/1627#issuecomment-294316176
+
+--Viết functions TRƯỚC render() để không bị lỗi token ; (Xài class chứ ko function)
+---> 
+
+--
