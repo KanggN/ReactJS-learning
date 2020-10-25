@@ -26,4 +26,4 @@ Link: https://github.com/facebookincubator/create-react-app/issues/1627#issuecom
 --Viết functions TRƯỚC render() để không bị lỗi token ; (Xài class chứ ko function)
 ---> 
 
---
+--Chuỗi trong react: var array = [{id:1},{},{}]
