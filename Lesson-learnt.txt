@@ -24,6 +24,7 @@ internal or external command, operable program or batch file
 Link: https://github.com/facebookincubator/create-react-app/issues/1627#issuecomment-294316176
 
 --Viết functions TRƯỚC render() để không bị lỗi token ; (Xài class chứ ko function)
----> 
 
 --Chuỗi trong react: var array = [{id:1},{},{}]
+
+--'Component' ở import phải giống 'Component' khai báo ở class extends (sensitive case)

@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 
 
 class Product extends Component { 
-    
+    constructor(){
+      super()
+      this.state = {
+        ID : 3 
+      }
+    }
     Ohshit = () =>{
       console.log(this.props.name)
     }
