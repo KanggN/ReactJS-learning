@@ -4,6 +4,9 @@
 
 --Gọi tên components có phân biệt hoa thường
 
+--DevTools failed to load SourceMap
+--->Tắt enable js source map trong devtool
+
 --Expected corresponding JSX closing tag for input: HTML bình thường: <input ...  >
 ---> Cú pháp JSX: <input/>   ---> Thêm '/' để đóng tag
 
@@ -28,3 +31,12 @@ Link: https://github.com/facebookincubator/create-react-app/issues/1627#issuecom
 --Chuỗi trong react: var array = [{id:1},{},{}]
 
 --'Component' ở import phải giống 'Component' khai báo ở class extends (sensitive case)
+
+--Gọi function chỉ cần onClick={tên function}; đặt function ở nơi cùng cấp với class
+
+--<button onClick={clickchua}>Click me</button> function gọi chổ khác
+
+--onMouseLeave={()=>console.log('ok')} function gọi ngay trên dòng
+
+--Khai báo Function(class-based) dưới class phải 1: Bỏ chữ 'function'; 2: Thêm 'this' khi gọi 
+Khai báo nó dưới render() thì phải thêm 'function' và không cần thêm 'this' khi gọi'

@@ -1,33 +1,53 @@
-import React, { Component } from 'react';
-import Todolist from './components/Todolist'
+import React from 'react';
+
+
+import TodoItem from './components/Todoitems';
+import Todosdata from './components/Todolist-data';
 import './App.css';
 
 
-class App extends Component {
+class App extends React.Component {
   constructor(){
     super()
     this.state = {
-      isLoggedIn : true
+      count: 0
     }
+    this.handleClick = this.handleClick.bind(this)
   }
-  
-  render () {
-      let rs = ''
-      if(this.state.isLoggedIn){
-        rs = 'in'
+  handleClick(){
+    this.setState(prevState => {
+      return{
+        count : prevState.count + 1
       }
-      else rs = 'out'
-      
-
-    return (
-      <div className="App">
-        <h1>You are currently logged in/out Answer: {rs}</h1>
-        <Todolist/>
+    })
+  }
+  render(){
+    return(
+      <div className="Appp">
+        <div className="container">
+            <h1>{this.state.count}</h1>
+            <button onClick={this.handleClick}>Change!</button>
+            <button onClick={()=>console.log(this.state.count)}>Check</button>
+        </div>  
       </div>
     )
   }
+};
+export default App
+
+
+
+
+/* 
+constructor(){
+  super()
+  this.state = {
+    todos : Todosdata
+  }
 }
-
-export default App;
-
-
+<div className="Todo-list">
+        <div className="container">
+        {Todoitems}
+        </div>
+      </div>
+ const Todoitems = this.state.todos.map(item=> <TodoItem key={item.id} item={item} />) */
