@@ -21,7 +21,7 @@ but still need the element to resemble a link, use a button and change it with a
 --->HMR: Hot Module Reload. WDS: Webpack Dev Server. This is just saying it's ready to refresh 
 when you save a file so you don't need to manually refresh
 
---Clone 1 repo rồi npm start lỗi: 'react-scripts' is not recognized as an 
+--Clone 1 repo rồi 'npm start' : 'react-scripts' is not recognized as an 
 internal or external command, operable program or batch file
 ---> npm install xong rồi npm start
 Link: https://github.com/facebookincubator/create-react-app/issues/1627#issuecomment-294316176
@@ -40,3 +40,10 @@ Link: https://github.com/facebookincubator/create-react-app/issues/1627#issuecom
 
 --Khai báo Function(class-based) dưới class phải 1: Bỏ chữ 'function'; 2: Thêm 'this' khi gọi 
 Khai báo nó dưới render() thì phải thêm 'function' và không cần thêm 'this' khi gọi'
+
+--This.setState is not a function
+---> Bind nó trên constructor
+
+--Truyền từ cha vào con dùng prop, con vào cha dùng function (đứng ở cha)
+
+--Card-header bootstap wasnt rendered properly !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
