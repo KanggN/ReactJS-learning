@@ -49,4 +49,8 @@ Khai báo nó dưới render() thì phải thêm 'function' và không cần th�
 --Muốn kích hoạt hàm không cần truyền dữ liệu thì cũng truyền 1 value rồi để hàm đó xác nhận có truyền dữ liệu 
 rồi thực hiện các hành động khác VD: Hàm reset
 
+--Hàm setState có thể tạo ra state chưa khai báo từ trước (video số 15 nghiepuit 15:32)
+
+--prop 'name' của input phải trùng trên state để setState có thể replace qua việc [name] : value
+
 --Card-header bootstap wasnt rendered properly !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

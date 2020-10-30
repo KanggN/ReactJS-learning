@@ -1,0 +1,223 @@
+import react from 'react'
+import './App.css';
+import ColorPicker from './components/Colorpicker'
+import SizeSetting from './components/SizeSetting'
+import Reset from './components/Reset'
+import Result from './components/Result'
+class App extends react.Component {
+  constructor(){
+    super()
+    this.state = {
+      color : 'red',
+      fontSize : 15
+    }
+    this.SetColor = this.SetColor.bind(this)
+    this.SetFontSize = this.SetFontSize.bind(this)
+    this.onSettingDefault = this.onSettingDefault.bind(this)
+ 
+  }
+  SetColor(param){
+    this.setState({
+      color : param
+    })
+  }
+  SetFontSize(param){
+    this.setState({
+      fontSize : param
+    })
+  }
+  onSettingDefault(value){
+    if(value)
+    this.setState({
+      color : 'red',
+      fontSize : 15
+    })
+  }
+  render(){
+    return(
+      <div className="App">
+        <div className="container mt-5">
+          <div className="row"> 
+            <div className="col-6">
+              <ColorPicker color={this.state.color} ReceiveColor={this.SetColor}/>   
+            </div>       
+            <div className="col-6">
+                <SizeSetting fontSize={this.state.fontSize} ReceiveFontSize={this.SetFontSize}/>
+                <Reset onSettingDefault={this.onSettingDefault}/>
+            </div>
+          </div>
+          <div className="row mt-5">
+          <div className="col-12">
+              <Result color = {this.state.color}
+                      fontSize = {this.state.fontSize}/>
+            </div> 
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
+export default App;
+
+
+
+
+
+
+import react from 'react';
+
+class ColorPicker extends react.Component {
+    constructor(){
+        super()
+        this.state = {
+            color : ['red','green','blue','cyan']
+        }
+    }
+    ShowColor(color){
+        return {
+            backgroundColor: color,
+            width: '50px',
+            height: '50px',
+            margin: '0 5px',
+            display: 'inline-block'
+        }
+    }
+    SingleColor(color){
+        this.props.ReceiveColor(color)
+    }
+    
+    render(){
+        const abc = this.state.color.map((color,index)=>{
+            return <span key={index} style={this.ShowColor(color)} 
+                    onClick={() =>{this.SingleColor(color)}}
+                    className={color === this.props.color ? 'active' : ''}></span>
+        })
+        return(
+                <div className="card border-primary">
+                    <div className="card-header bg-primary text-white">
+                        Color Picker
+                    </div>
+                    <div className="card-body">
+                        {abc}
+                    </div>
+                </div>
+        )
+    }
+}
+
+export default ColorPicker
+
+
+
+
+
+
+
+
+import react from 'react';
+
+class SizeSetting extends react.Component {
+    Giamne(fontSize){
+        this.props.ReceiveFontSize(fontSize - 1)
+    }
+    Tangne(fontSize){
+        this.props.ReceiveFontSize(fontSize + 1)
+    }
+    render(){
+        
+        return(
+                <div className="card border-warning">
+                    <div className="card-header bg-warning">
+                        Size: {this.props.fontSize}px
+                    </div>
+                    <div className="card-body">
+                        <button type="button" 
+                                className="btn btn-success mx-2" 
+                                onClick={()=>this.Giamne(this.props.fontSize)}>Giảm</button>
+                        <button type="button" 
+                                className="btn btn-success mx-2"
+                                onClick={()=>this.Tangne(this.props.fontSize)}>Tăng</button>
+                    </div>
+                </div>
+        )
+    }
+}
+
+export default SizeSetting
+
+
+
+
+
+
+
+
+import react from 'react';
+
+class Reset extends react.Component {
+    onResetDefault=()=>{
+        this.props.onSettingDefault('aa')
+    }
+    render(){
+        return(
+                <button type="button" 
+                        className="btn btn-primary mt-3"
+                        onClick={this.onResetDefault}>Reset</button>
+        )
+    }
+}
+
+export default Reset
+
+
+
+
+
+
+
+
+
+import react from 'react';
+
+class Result extends react.Component {
+    setStyle(){
+       return{color: this.props.color, borderColor : this.props.color, fontSize : this.props.fontSize} 
+    }
+    render(){
+        return(
+                <div>
+                    <h3>Color: {this.props.color} - Fontsize : {this.props.fontSize}px</h3>
+                    <p style={this.setStyle()} className="NoiDung">Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
+                </div>
+        )
+    }
+}
+
+export default Result
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
