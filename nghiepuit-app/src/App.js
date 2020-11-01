@@ -1,90 +1,40 @@
 import react from 'react'
 import './App.css';
+import TaskForm from './components/task-form'
+import Control from './components/control'
+import TaskList from './components/task-list'
 
 class App extends react.Component {
-  constructor(){
-    super()
-    this.state = {
-      username : '',
-      password : '',
-      comment : '',
-      gender : 1,
-      lang : 'en',
-      accept : false
-    }
-    this.onHandleChange = this.onHandleChange.bind(this)
-    this.onHandleSubmit = this.onHandleSubmit.bind(this)
-  }
-  onHandleChange(e){
-    var name = e.target.name;
-    var value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
-    this.setState({
-      [name] : value
-    })
-  }
-  onHandleSubmit(e){
-    e.preventDefault()
-    console.log(this.state)
-  }
+ onGenerateData(){
+   console.log('Hellllo')
+ }
   render(){
     return(
-      <div className="container mt-5">
-        <div className="row">
-          <div className="col-5 ml-5">
-            <div className="card border-primary">
-                <div className="card-header bg-primary">Form</div>
-                  <form onSubmit={this.onHandleSubmit}>
-                  <div className="form-group">
-                    <div className="card-body">
-                            <label>Tên</label>
-                            <input type="text"
-                              className="form-control" 
-                              name="username" 
-                              onChange={this.onHandleChange} />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                    <div className="card-body">
-                            <label>Mật Khẩu</label>
-                            <input type="text"
-                              className="form-control" 
-                              name="password" 
-                              onChange={this.onHandleChange} />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label>Mô tả</label>
-                      <textarea className="form-control" 
-                                name="comment"  
-                                rows="3"
-                                onChange={this.onHandleChange}></textarea>
-                    </div>
-                    <div className="form-group">
-                      <label>Giới tính</label>
-                      <select className="form-control" name="gender" value={this.state.gender} onChange={this.onHandleChange} >
-                        <option value={1}>Nam</option>
-                        <option value={0}>Nữ</option>
-                      </select>
-                    </div>
-                    <div className="form-check my-4">
-                        <input type="radio" className="form-check-input d-block" name="lang" onChange={this.onHandleChange} value="en" checked={this.state.lang === 'en'}/>
-                        Tiếng Anh
-                        <input type="radio" className="form-check-input d-block" name="lang" onChange={this.onHandleChange} value="vi" checked={this.state.lang === 'vi'}/> <br/>
-                        Tiếng Việt
-                    </div>
-                    <div className="form-check">
-                      <label className="form-check-label">
-                        <input type="checkbox" className="form-check-input" name="accept" onChange={this.onHandleChange}  checked={this.state.accept}/>
-                        I Accept
-                      </label>
-                    </div>
-                    <button type="submit" className="btn btn-primary m-2">Submit</button>
-                    <button type="reset" className="btn btn-success m-2">Reset</button>
-                  </form>
+          <div className="container">
+            <div className="row">
+              <div className="col-12">
+                <h1 className="text-center">Quản Lý Công Việc</h1>
+                <hr />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-3">
+                <TaskForm/>
+              </div>
+              <div className="col-md-9">
+                <form>
+                  <button className="btn btn-primary my-3 mr-3">
+                      Thêm Công Việc
+                  </button>
+                  <button type="button" onClick={this.onGenerateData} className="btn btn-danger my-3">
+                      Tạo dữ liệu mẫu
+                  </button>
+                    <Control/>   
+                    <TaskList/>
+                </form>
+              </div>
             </div>
           </div>
-        </div> 
-      </div>
     )
   }
 }

@@ -53,4 +53,6 @@ rồi thực hiện các hành động khác VD: Hàm reset
 
 --prop 'name' của input phải trùng trên state để setState có thể replace qua việc [name] : value
 
+--button có type bằng button để khi bấm không bị refresh page
+
 --Card-header bootstap wasnt rendered properly !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
