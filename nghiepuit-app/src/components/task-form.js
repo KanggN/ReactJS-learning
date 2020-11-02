@@ -1,10 +1,15 @@
 import React from 'react';
 
 class TaskForm extends React.Component {
+    onCloseForm = ()=> {
+     this.props.onCloseForm()
+    }
     render(){
+      
         return(
-            <div className="card border-warning">
-                <div className="card-header bg-warning">Thêm Công Việc</div>
+            <div className="card border-warning my-3">
+                <div className="card-header bg-warning d-flex justify-content-between">
+                  Thêm Công Việc <a href="/#" onClick={this.onCloseForm}><i className="fas fa-times-circle text-danger"></i></a></div> 
                 <div className="card-body">
                   <form>
                     <div className="form-group">

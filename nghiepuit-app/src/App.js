@@ -8,7 +8,8 @@ class App extends react.Component {
   constructor(){
     super();
     this.state = {
-      tasks : []
+      tasks : [],
+      isDisplayForm : false
     }
   }
   componentDidMount(){
@@ -44,9 +45,19 @@ class App extends react.Component {
   generateID(){
     return  this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4()
   }
-  
+  onToggleForm = () => {
+    this.setState({
+      isDisplayForm : !this.state.isDisplayForm
+    })
+  }
+  onCloseForm = ()=>{
+    this.setState({
+      isDisplayForm : false
+    })
+  }
     render(){
-      var {tasks} = this.state
+      var {tasks, isDisplayForm} = this.state
+      const elmTaskForm = isDisplayForm ? <TaskForm onCloseForm={this.onCloseForm}/> : ''
     return(
           <div className="container">
             <div className="row">
@@ -57,11 +68,11 @@ class App extends react.Component {
             </div>
             <div className="row">
               <div className="col-md-3">
-                <TaskForm/>
+                {elmTaskForm}
               </div>
-              <div className="col-md-9">
+              <div className={isDisplayForm ? 'col-md-9' : 'col-md-12'}>
                 <form>
-                  <button type="button" className="btn btn-primary my-3 mr-3">
+                  <button type="button" onClick={this.onToggleForm} className="btn btn-primary my-3 mr-3">
                       Thêm Công Việc
                   </button>
                   <button type="button" onClick={this.onGenerateData} className="btn btn-danger my-3">
