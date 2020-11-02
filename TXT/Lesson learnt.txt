@@ -55,4 +55,14 @@ rồi thực hiện các hành động khác VD: Hàm reset
 
 --button có type bằng button để khi bấm không bị refresh page
 
---Card-header bootstap wasnt rendered properly !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--math.floor(3.14) = 3 Look at the number line - Floor: Go to the next integer left of where you are. - 
+Ceiling: Go to the next integer right of where you are
+-->floor làm tròn lấy số nhỏ hơn hay còn gọi là lấy bên trái trục số
+
+--0x10000 = 16^4 là số hệ 16; Số hệ 16 gồm các số từ 1 đến 9 a đến f
+
+--Cấu trúc ES6 : var {ABC} = this.props bằng var ABC = this.props.ABC
+
+--Khi state đang ở dạng object thì không log ra xem được ?
+
+--Card-header bootstap wasnt rendered correctly !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
