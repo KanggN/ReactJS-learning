@@ -65,4 +65,17 @@ Ceiling: Go to the next integer right of where you are
 
 --Khi state đang ở dạng object thì không log ra xem được ?
 
+--Map là vòng lặp, mỗi lần lặp lấy 1 phần tử trong array VD: tasks.map((task,index)=>{return do something})
+
+--var value = e.target.value
+  if(name === 'status'){
+        value === 'true' ? true : false }  Sai, mặc dù đã declare value trước đó
+---> value = e.target.value === 'true' ? true : false
+      
+--Trước khi dùng hàm map phải check xem nó có tồn tại ko. Nếu ko nó sẽ báo undefined
+  VD: if(tasks){ var elmTask = tasks.map ...}
+--->Làm mọi cách để có dữ liệu truyền vào để không báo lỗi
+
+--Cẩn thận hàm push nên làm từ từ. Không làm tắt vì có khi hàm này trả về số lượng phần tử thay vì những thứ bên trong
+
 --Card-header bootstap wasnt rendered correctly !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

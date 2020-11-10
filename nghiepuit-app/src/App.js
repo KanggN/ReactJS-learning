@@ -13,11 +13,12 @@ class App extends react.Component {
     }
   }
   componentDidMount(){
-    if(localStorage.getItem('Tasks') != null)
+    if(localStorage && localStorage.getItem('Tasks'))
     var a = JSON.parse(localStorage.getItem('Tasks')) 
     this.setState({
       tasks : a
     })
+    
   }
   onGenerateData = () =>{
     var task = [
@@ -37,6 +38,9 @@ class App extends react.Component {
         status : true
       },
     ]
+    this.setState({
+      tasks : task
+    })
     localStorage.setItem('Tasks',JSON.stringify(task))
   }
   s4(){
@@ -55,9 +59,39 @@ class App extends react.Component {
       isDisplayForm : false
     })
   }
+  onSubmit = (data) =>{
+    var {tasks} = this.state
+    data.id = this.generateID()
+    tasks.push(data)
+    this.setState({
+      tasks : tasks
+    })
+    localStorage.setItem('Tasks',JSON.stringify(tasks))
+  }
+  onUpdateStatus = (id) =>{
+    var {tasks} = this.state
+    var index = this.findIndex(id)
+    if (index !== -1){
+      tasks[index].status = !tasks[index].status
+      this.setState({
+        tasks : tasks
+      })
+      localStorage.setItem('Tasks',JSON.stringify(tasks))
+    }
+  }
+  findIndex = (id) =>{
+    var {tasks} = this.state
+    var result = -1
+    tasks.forEach((task,index)=>{
+      if(id === task.id)
+      result = index
+    })
+    return result
+  }
     render(){
       var {tasks, isDisplayForm} = this.state
-      const elmTaskForm = isDisplayForm ? <TaskForm onCloseForm={this.onCloseForm}/> : ''
+      const elmTaskForm = isDisplayForm ? <TaskForm onSubmit={this.onSubmit}
+                                                    onCloseForm={this.onCloseForm}/> : ''
     return(
           <div className="container">
             <div className="row">
@@ -79,7 +113,8 @@ class App extends react.Component {
                       Tạo dữ liệu mẫu
                   </button>
                     <Control/>   
-                    <TaskList tasks = {tasks}/>
+                    <TaskList tasks = {tasks} 
+                              onUpdateStatus = {this.onUpdateStatus}/>
                 </form>
               </div>
             </div>
