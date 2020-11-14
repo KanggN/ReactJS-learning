@@ -4,10 +4,21 @@ class TaskForm extends React.Component {
     constructor(){
       super()
       this.state = {
+        id : '',
         name : '',
-        status : true
+        status : true,
       }
     }
+    componentDidMount = () =>{
+      if(this.props.task){
+        this.setState({
+          id : this.props.task.id,
+          name : this.props.task.name,
+          status : this.props.task.status,
+        })
+      }
+    }
+    
     onCloseForm = ()=> {
      this.props.onCloseForm()
     }
@@ -23,7 +34,11 @@ class TaskForm extends React.Component {
     }
     onHandleSubmit = (e) =>{
       e.preventDefault()
-      this.props.onSubmit(this.state)
+      if(this.state.id){
+        this.props.onUpdate(this.state)
+      } else {
+        this.props.onSubmit(this.state)
+      }
       this.onCloseForm()
     }
     onClear = () =>{
@@ -33,10 +48,11 @@ class TaskForm extends React.Component {
       })
     }
     render(){
+      var { id } = this.state
         return(
             <div className="card border-warning my-3">
                 <div className="card-header bg-warning d-flex justify-content-between">
-                  Thêm Công Việc <a href="/#" onClick={this.onCloseForm}><i className="fas fa-times-circle text-danger"></i></a></div> 
+                  {id !== '' ? 'Cập Nhật Công Việc' : 'Thêm Công Việc'} <a href="/#" onClick={this.onCloseForm}><i className="fas fa-times-circle text-danger"></i></a></div> 
                 <div className="card-body">
                   <form onSubmit={this.onHandleSubmit}>
                     <div className="form-group">
@@ -58,7 +74,7 @@ class TaskForm extends React.Component {
                       </select>
                     </div>
                     <div className="d-flex justify-content-center">
-                      <button type="submit" className="btn btn-warning mx-2" >Thêm</button>
+                      <button type="submit" className="btn btn-warning mx-2" >{id !== '' ? 'Cập Nhật' : 'Thêm'}</button>
                       <button type="button" className="btn btn-danger mx-2" onClick={this.onClear}>Hủy Bỏ</button>
                     </div>
                   </form>

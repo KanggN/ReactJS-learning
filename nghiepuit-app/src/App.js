@@ -9,7 +9,13 @@ class App extends react.Component {
     super();
     this.state = {
       tasks : [],
-      isDisplayForm : false
+      isDisplayForm : false,
+      taskFixing : '',
+      filter : {
+        name : '',
+        status : -1
+      },
+      keyword : ''
     }
   }
   componentDidMount(){
@@ -49,14 +55,35 @@ class App extends react.Component {
   generateID(){
     return  this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4()
   }
-  onToggleForm = () => {
-    this.setState({
-      isDisplayForm : !this.state.isDisplayForm
+  findIndex = (id) =>{
+    var {tasks} = this.state
+    var result = -1
+    tasks.forEach((task,index)=>{
+      if(id === task.id)
+      result = index
     })
+    return result
+  }
+  onToggleForm = () =>{
+    if(this.state.isDisplayForm){
+      this.setState({
+        taskFixing : ''
+      })
+    } else {
+      this.setState({
+        isDisplayForm : true,
+        taskFixing : ''
+      })
+    }
   }
   onCloseForm = ()=>{
     this.setState({
       isDisplayForm : false
+    })
+  }
+  onShowForm = ()=>{
+    this.setState({
+      isDisplayForm : true
     })
   }
   onSubmit = (data) =>{
@@ -79,19 +106,76 @@ class App extends react.Component {
       localStorage.setItem('Tasks',JSON.stringify(tasks))
     }
   }
-  findIndex = (id) =>{
+  onDeleteItem = (id) => {
     var {tasks} = this.state
-    var result = -1
-    tasks.forEach((task,index)=>{
-      if(id === task.id)
-      result = index
+    var index = this.findIndex(id)
+    if (index !== -1){
+      tasks.splice(index,1)
+      this.setState({
+        tasks : tasks
+      })
+      localStorage.setItem('Tasks',JSON.stringify(tasks))
+    }
+    this.onCloseForm()
+  }
+  onFixItem = (id) => {
+    var {tasks} = this.state
+    var index = this.findIndex(id)
+    var taskFixing = tasks[index]
+    this.setState({
+      taskFixing : taskFixing
     })
-    return result
+    this.onShowForm()
+  }
+  onUpdate = (task) =>{
+    var {tasks} = this.state
+    var index = this.findIndex(task.id)
+    tasks[index] = task
+    this.setState({
+      tasks : tasks
+    })
+    localStorage.setItem('Tasks',JSON.stringify(task))
+  }
+  onFilter = (filterName,filterStatus) =>{
+    filterStatus = +filterStatus
+    filterName = filterName.toLowerCase()
+    var newFilter = {
+      name : filterName,
+      status : filterStatus
+    }
+    this.setState({
+      filter : newFilter
+    })
+  }
+  onSearch = (keyword)  => {
+    keyword = keyword.toLowerCase()   
+    this.setState({
+      keyword : keyword
+    })
   }
     render(){
-      var {tasks, isDisplayForm} = this.state
+      var {tasks, isDisplayForm, taskFixing, filter, keyword} = this.state
+      if(filter){
+          if(filter.name){
+            tasks = tasks.filter((task) =>{
+            return task.name.toLowerCase().indexOf(filter.name) !== -1
+          })
+        }
+          if(filter.status !== -1){
+            tasks = tasks.filter((task) => {
+              return task.status === (filter.status === 0 ? false : true)
+            })
+        }
+      }
+      if(keyword){
+          tasks = tasks.filter((task) =>{
+          return task.name.toLowerCase().indexOf(keyword) !== -1
+        })
+      } 
       const elmTaskForm = isDisplayForm ? <TaskForm onSubmit={this.onSubmit}
-                                                    onCloseForm={this.onCloseForm}/> : ''
+                                                    onUpdate={this.onUpdate}
+                                                    onCloseForm={this.onCloseForm}
+                                                    task={taskFixing}/> : ''
     return(
           <div className="container">
             <div className="row">
@@ -112,9 +196,12 @@ class App extends react.Component {
                   <button type="button" onClick={this.onGenerateData} className="btn btn-danger my-3">
                       Tạo dữ liệu mẫu
                   </button>
-                    <Control/>   
+                    <Control onSearch={this.onSearch}/>   
                     <TaskList tasks = {tasks} 
-                              onUpdateStatus = {this.onUpdateStatus}/>
+                              onUpdateStatus = {this.onUpdateStatus}
+                              onDeleteItem = {this.onDeleteItem}
+                              onFixItem = {this.onFixItem}
+                              onFilter = {this.onFilter}/>
                 </form>
               </div>
             </div>

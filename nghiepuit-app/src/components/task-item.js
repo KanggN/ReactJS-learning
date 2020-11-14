@@ -10,6 +10,12 @@ class TaskItem extends react.Component {
   onUpdateStatus = () =>{
     this.props.onUpdateStatus(this.props.tasks.id)
   }
+  onDeleteItem = () =>{
+    this.props.onDeleteItem(this.props.tasks.id)
+  }
+  onFixItem = () =>{
+    this.props.onFixItem(this.props.tasks.id)
+  }
   render(){
     var {tasks,index} = this.props
     return(
@@ -18,8 +24,8 @@ class TaskItem extends react.Component {
             <td>{tasks.name}</td>
             <td className="text-center"><span onClick={this.onUpdateStatus} className={tasks.status ? 'badge badge-success' : 'badge badge-danger'}>{tasks.status ? 'Kích Hoạt' : 'Ẩn'}</span></td>
             <td className="text-center">
-                <button type="button" className="btn btn-warning mx-2">Sửa</button>
-                <button type="button" className="btn btn-danger mx-2">Xóa</button></td>
+                <button type="button" onClick={this.onFixItem} className="btn btn-warning mx-2">Sửa</button>
+                <button type="button" onClick={this.onDeleteItem} className="btn btn-danger mx-2">Xóa</button></td>
         </tr>
     )
   }

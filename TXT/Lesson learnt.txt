@@ -78,4 +78,15 @@ Ceiling: Go to the next integer right of where you are
 
 --Cẩn thận hàm push nên làm từ từ. Không làm tắt vì có khi hàm này trả về số lượng phần tử thay vì những thứ bên trong
 
+--tasks.splice(2,1) khác với tasks = tasks.splice(2,1). VD: var array = [1,2,3,4] Cách 1 ra [1,2,4]; Cách 2 ra [3]
+
+--taskName.toLowerCase() không hoạt động
+--->taskName = taskName.toLowerCase()
+
+--Đổi string thành number thì tasks = +tasks
+
+--Strictmode render làm console.log chạy 2 lần
+
+--if(ABC){do something} kiểm tra ABC !== null,undefined,0
+
 --Card-header bootstap wasnt rendered correctly !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
