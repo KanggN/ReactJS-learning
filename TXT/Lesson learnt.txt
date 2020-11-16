@@ -89,4 +89,25 @@ Ceiling: Go to the next integer right of where you are
 
 --if(ABC){do something} kiểm tra ABC !== null,undefined,0
 
+--Hàm compare trong hàm sort nhận 2 giá trị a,b kề nhau trong mảng trả về 1 trong 3 giá trị -1(giữ),1(đảo),0(giữ). 
+Trong đó nó lấy a-b <0 (a bé hơn b) nó ko đảo return -1. Ngược lại return 1. Return 0 khi a và b giống nhau
+  Hàm sort rút gọn : (Chưa confirm)
+array.sort(function(a,b){
+    var a = a.age 
+    var b = b.age 
+    if(a < b || a === b) {
+        return -1
+    }
+    if(a > b) {
+        return 1
+    } 
+})
+
+--Gọi console.log cái state ra không bị trễ 
+onSort = (name) => {
+    this.setState({
+      name : name
+    },()=>console.log(this.state.name))
+  }
+
 --Card-header bootstap wasnt rendered correctly !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

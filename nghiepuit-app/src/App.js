@@ -15,7 +15,11 @@ class App extends react.Component {
         name : '',
         status : -1
       },
-      keyword : ''
+      keyword : '',
+      sort : {
+        type : '',
+        value : ''
+      }
     }
   }
   componentDidMount(){
@@ -153,8 +157,70 @@ class App extends react.Component {
       keyword : keyword
     })
   }
+  onSort = (type,value) => {
+    this.setState({
+      sort : {
+        type : type,
+        value : value
+      }
+    })
+  }
     render(){
-      var {tasks, isDisplayForm, taskFixing, filter, keyword} = this.state
+      var {tasks, isDisplayForm, taskFixing, filter, keyword, sort} = this.state
+      if(sort){
+        if(sort.type === 'name'){
+          if(sort.value === 1){
+              console.log(sort)
+                  tasks.sort((a,b)=>{
+              if (a.name < b.name) {
+                return -1;
+              }
+              if (a.name > b.name) {
+                return 1;
+              }
+              return 0;
+            })
+          } else if (sort.value === -1){
+            console.log(sort)
+                  tasks.sort((a,b)=>{
+              if (a.name < b.name) {
+                return 1;
+              }
+              if (a.name > b.name) {
+                return -1;
+              }
+              return 0;
+            })
+          }
+        }
+        if(sort.type ==='status'){
+          if(sort.value === 1){
+            tasks.sort((a,b)=>{
+              if (a.status === true && b.status ===false) {
+                return -1;
+              }
+              if (a.status === false && b.status ===true) {
+                return 1;
+              }
+              return 0;
+            })
+          } else if (sort.value === -1){
+            tasks.sort((a,b)=>{
+              if (a.status === true && b.status ===false) {
+                return 1;
+              }
+              if (a.status === false && b.status ===true) {
+                return -1;
+              }
+              return 0;
+            })
+          }
+        }
+      }
+        
+
+
+
       if(filter){
           if(filter.name){
             tasks = tasks.filter((task) =>{
@@ -196,7 +262,8 @@ class App extends react.Component {
                   <button type="button" onClick={this.onGenerateData} className="btn btn-danger my-3">
                       Tạo dữ liệu mẫu
                   </button>
-                    <Control onSearch={this.onSearch}/>   
+                    <Control  onSearch={this.onSearch}
+                              onSort={this.onSort}/>   
                     <TaskList tasks = {tasks} 
                               onUpdateStatus = {this.onUpdateStatus}
                               onDeleteItem = {this.onDeleteItem}

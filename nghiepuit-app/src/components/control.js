@@ -7,7 +7,7 @@ class Control extends React.Component {
         return(
             <div className="row">
                 <Search onSearch = {this.props.onSearch}/>
-                <Sort/>
+                <Sort onSort={this.props.onSort}/>
             </div>
         )
     }
